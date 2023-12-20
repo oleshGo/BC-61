@@ -1,1 +1,3 @@
-console.log(date.getFullYear());
+import { getCurrentMonth } from "./date/getCurrentMonth.js";
+
+console.log(getCurrentMonth());

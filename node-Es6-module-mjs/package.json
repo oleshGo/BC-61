@@ -2,10 +2,10 @@
   "name": "commonjs-module",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.mjs"
   },
   "keywords": [],
   "author": "",
