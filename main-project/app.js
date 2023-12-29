@@ -2,25 +2,31 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-const booksRouter = require("./routes/api/books-routes");
 const contactsRouter = require("./routes/api/contacts");
+const booksRouter = require("./routes/api/books");
 
 const app = express();
+
+// const { config } = require("dotenv");
+// config();
+// console.log(process.env.PASSWORD);
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 app.use(cors());
-// app.use(express.json())
+app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
+app.use("/api/books", booksRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: "Server Error" });
+  const { status = 500, message = "Server Error" } = err;
+  res.status(status).json({ message });
 });
 
 module.exports = app;
