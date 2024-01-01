@@ -12,9 +12,6 @@ const getById = async (req, res, next) => {
   const book = await booksFunctions.getById(id);
   if (!book) {
     throw httpError(404, `Book with id ${id} not found`);
-    //   const error = new Error(`Book with id ${id} not found`);
-    //   error.status = 404;
-    //   throw error;
   }
   res.json(book);
 };
@@ -41,8 +38,7 @@ const deleteById = async (req, res, next) => {
   if (!deletedBook) {
     throw httpError(404, `Book with id ${id} not found`);
   }
-  // res.json(deletedBook);
-  res.status(204);
+  res.json(deletedBook);
 };
 
 module.exports = {

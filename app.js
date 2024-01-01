@@ -7,17 +7,12 @@ const booksRouter = require("./routes/api/books");
 
 const app = express();
 
-// const { config } = require("dotenv");
-// config();
-// console.log(process.env.PASSWORD);
-
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/contacts", contactsRouter);
 app.use("/api/books", booksRouter);
 
 app.use((req, res) => {
