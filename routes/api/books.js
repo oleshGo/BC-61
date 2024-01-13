@@ -3,9 +3,11 @@ const express = require("express");
 const booksControllers = require("../../controllers/books");
 const { validateBody } = require("../../decorators");
 const { booksSchemas } = require("../../validators");
-const { isValidMongoId } = require("../../middlewares");
+const { isValidMongoId, authorization } = require("../../middlewares");
 
 const route = express.Router();
+
+route.use(authorization);
 
 route.get("/", booksControllers.getAll);
 route.post("/", validateBody(booksSchemas.createBookSchema), booksControllers.create);

@@ -1,11 +1,13 @@
-// const booksFunctions = require("../models/books");
 const { httpError } = require("../helpers");
 const { ctrlWrapper } = require("../decorators");
 const Book = require("../models/book");
 
 const getAll = async (req, res, next) => {
-  // const books = await Book.find({}, "-title").limit(2).skip(2);
-  const books = await Book.find({}, "-title");
+  const { id: owner } = req.user;
+  const { limit, page } = req.query;
+  const skip = (page - 1) * limit;
+  // const books = await Book.find({ owner }, "-title").skip(skip).limit(limit);
+  const books = await Book.find({ owner }, "-title", { skip, limit }).populate("owner", "email name");
   res.json(books);
 };
 
@@ -21,7 +23,8 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   const body = req.body;
-  const createdBook = await Book.create(body);
+  const { id } = req.user;
+  const createdBook = await Book.create({ ...body, owner: id });
   res.status(201).json(createdBook);
 };
 
