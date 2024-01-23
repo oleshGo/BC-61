@@ -6,6 +6,7 @@ module.exports = {
     jest: true,
   },
   extends: ["standard", "prettier, plugin:jest/recommended"],
+  plugins: ["jest"],
   parserOptions: {
     ecmaVersion: 12,
   },
