@@ -13,7 +13,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
-app.use(fileUpload());
 
 app.use("/api/books", booksRouter);
 app.use("/api/auth", authRouter);

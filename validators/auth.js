@@ -15,7 +15,15 @@ const loginUser = Joi.object({
   password: Joi.string().required(),
 });
 
+const emailSchema = Joi.object({
+  email: Joi.string()
+    .pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+    .required(),
+});
+emailSchema;
+
 module.exports = {
   registerUser,
   loginUser,
+  emailSchema,
 };
